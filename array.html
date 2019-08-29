@@ -1,0 +1,72 @@
+<html>
+<head>
+<script>
+
+/**
+ * getArrSplit()
+ *
+ * Returns a multidimensional array with equal length plus any remaining items in last nested array
+ * 
+ * @param {array} _anArray (Required: The array to split.)
+ * @param {number} _aDivisor (Required: The number to devide the array by.)
+ *
+ * @return {array} (An array containing the range numbers.)
+ *
+ * @throws {TypeError} (If any of start, end and step is not a finite number.)
+ * @throws {TypeError} (If devisor is not a positive number.)
+ */
+
+function getArrSplit(_anArray, _aDivisor){
+
+    aDivisor = _aDivisor;
+    anArray = _anArray;
+
+    // Throw an error _anArray is not an array.
+    if (!Array.isArray(anArray)) {
+        throw new TypeError('getArrSplit() expects only an array as argument.');
+    }
+
+    // Throw an error aDivisor is not a positive integer.
+    if (!Number.isInteger(_aDivisor) ) {
+        throw new TypeError('range() expects only finite numbers a devisor argument.');
+    }
+
+    var total = anArray.length;
+
+    arrNew = new Array();
+
+    var counter = 0;
+
+    for (var j = 0; j <= (total -1); j = j + aDivisor) {
+        arrNew[counter] = new Array();
+        for (i = aDivisor - 1; i >= 0; --i) {
+    
+            if(anArray[i]!=undefined)
+            {
+                arrNew[counter].push(anArray[i]);
+                anArray.splice(i, 1);
+            }
+        
+        }
+        counter ++;
+    }
+
+    return arrNew;
+
+}
+
+function demo(){
+
+    var anArray = Array('red','green','blue','biscuit','banana', 'yellow','today','yesterday');
+
+    var arr = getArrSplit(anArray, 3);
+    console.log(arr);
+
+}
+
+
+
+</script>
+</head>
+<body onLoad=demo()></body>
+</html>
